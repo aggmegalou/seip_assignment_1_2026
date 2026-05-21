@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-api
+  labels:
+    app: echo-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echo-api
+  template:
+    metadata:
+      labels:
+        app: echo-api
+    spec:
+      containers:
+        - name: echo-api
+          image: ghcr.io/aggmegalou/echo-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: echo-api-config
+            - secretRef:
+                name: echo-api-secret
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5

@@ -22,7 +22,7 @@ Also make sure:
 
 ---
 
-## Task 4.1 -  Deploy and test the app
+## Deploy and test the app
 
 ### Step 1: Clone the repository
 
@@ -75,7 +75,7 @@ You should see:
 
 ---
 
-## Task 4.2 -  Port forwarding and endpoints
+## Port forwarding and endpoints
 
 The service runs inside the cluster. To open it on your computer, use port forwarding.
 
